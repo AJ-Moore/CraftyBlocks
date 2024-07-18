@@ -31,12 +31,12 @@
     <Filter Include="Source Files\Core\Services">
       <UniqueIdentifier>{ac0f0a11-414c-471a-a5ab-fd8d6b253a1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core\ResourceManager">
+      <UniqueIdentifier>{1a8ccf95-7d3e-423d-8742-94acc87586ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CraftyBlocks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
@@ -51,20 +51,11 @@
     <ClCompile Include="Renderer\GLRenderBlock.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Animation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\BoneAnim.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer\Transform.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Mesh.cpp">
       <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Services\Services.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Services\time.cpp">
       <Filter>Source Files\Core\Services</Filter>
@@ -72,11 +63,26 @@
     <ClCompile Include="Core\Entity.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Material.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Game\Player.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\AShader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\BoneAnim.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Animation.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Material.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Services\Services.cpp">
+      <Filter>Source Files\Core\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Scene.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +163,30 @@
     </ClInclude>
     <ClInclude Include="Renderer\AShader.h">
       <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Renderer.h">
+      <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\World.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\StateMachine.h">
+      <Filter>Source Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\State.h">
+      <Filter>Source Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Event.h">
+      <Filter>Source Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ResourceManager\Resource.h">
+      <Filter>Source Files\Core\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ResourceManager\ResourceManager.h">
+      <Filter>Source Files\Core\ResourceManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

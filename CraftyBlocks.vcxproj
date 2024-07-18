@@ -149,6 +149,7 @@
     <ClCompile Include="Core\Services\time.cpp" />
     <ClCompile Include="CraftyBlocks.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Game\Player.cpp" />
     <ClCompile Include="Renderer\Animation.cpp" />
     <ClCompile Include="Renderer\AShader.cpp" />
     <ClCompile Include="Renderer\BoneAnim.cpp" />
@@ -165,11 +166,15 @@
     <ClInclude Include="Core\Entity.h" />
     <ClInclude Include="Core\GameObject.h" />
     <ClInclude Include="Core\Interface\IManagedObject.h" />
+    <ClInclude Include="Core\ResourceManager\Resource.h" />
+    <ClInclude Include="Core\ResourceManager\ResourceManager.h" />
     <ClInclude Include="Core\Scene.h" />
     <ClInclude Include="Core\Services\Service.h" />
     <ClInclude Include="Core\Services\Services.h" />
     <ClInclude Include="Core\Services\Time.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Game\Player.h" />
+    <ClInclude Include="Game\World.h" />
     <ClInclude Include="Renderer\Animation.h" />
     <ClInclude Include="Renderer\ARenderBlock.h" />
     <ClInclude Include="Renderer\AShader.h" />
@@ -179,12 +184,16 @@
     <ClInclude Include="Renderer\Material.h" />
     <ClInclude Include="Renderer\Mesh.h" />
     <ClInclude Include="Renderer\PrimitiveMode.h" />
+    <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Renderer\Shader.h" />
     <ClInclude Include="Renderer\Texture.h" />
     <ClInclude Include="Renderer\Transform.h" />
     <ClInclude Include="Renderer\Viewport.h" />
     <ClInclude Include="Renderer\Window.h" />
+    <ClInclude Include="Util\Event.h" />
+    <ClInclude Include="Util\StateMachine.h" />
     <ClInclude Include="Util\Logger.h" />
+    <ClInclude Include="Util\State.h" />
     <ClInclude Include="Util\UID.h" />
   </ItemGroup>
   <ItemGroup>

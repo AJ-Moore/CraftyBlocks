@@ -22,7 +22,7 @@ namespace CraftyBlocks
 		std::unordered_map<UID, std::shared_ptr<Entity>> m_entities;
 		bool m_bDoneInit = false;
 
-		using RenderQueue = std::map<uint, Entity*>;
+		using RenderQueue = std::map<UID, Entity*>;
 		std::map<uint, RenderQueue> m_renderQueue;
 	};
 }

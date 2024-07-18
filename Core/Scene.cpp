@@ -45,14 +45,18 @@ namespace CraftyBlocks
 
 			if (iter != queue->second.end())
 			{
-				m_renderQueue[entity->getRenderPriority()].insert(std::make_pair(entity->UUID.getID(), entity));
+				m_renderQueue[entity->GetRenderPriority()].insert(std::make_pair(entity->UUID.getID(), entity));
 				queue->second.erase(entity->UUID.getID());
 				entity->m_currentsRenderPriority = m_renderPriority;
 			}
 		}
 		else
 		{
-			LogWarning("Unable to update render queue no entity found in scene.");
+			Log(Logger::WARN, "Unable to update render queue.");
 		}
+	}
+
+	void Scene::Render()
+	{
 	}
 }
