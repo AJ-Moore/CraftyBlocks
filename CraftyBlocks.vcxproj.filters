@@ -84,6 +84,12 @@
     <ClCompile Include="Core\Scene.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Core\ResourceManager\ResourceManager.cpp">
+      <Filter>Source Files\Core\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer\GLRenderBlock.h">
@@ -187,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="Core\ResourceManager\ResourceManager.h">
       <Filter>Source Files\Core\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\TextureUtils.h">
+      <Filter>Source Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Core\Entity.cpp" />
+    <ClCompile Include="Core\ResourceManager\ResourceManager.cpp" />
     <ClCompile Include="Core\Scene.cpp" />
     <ClCompile Include="Core\Services\Services.cpp" />
     <ClCompile Include="Core\Services\time.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="Renderer\GLRenderBlock.cpp" />
     <ClCompile Include="Renderer\Material.cpp" />
     <ClCompile Include="Renderer\Mesh.cpp" />
+    <ClCompile Include="Renderer\Texture.cpp" />
     <ClCompile Include="Renderer\Transform.cpp" />
     <ClCompile Include="Util\Logger.cpp" />
     <ClCompile Include="Util\UID.cpp" />
@@ -187,6 +189,7 @@
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Renderer\Shader.h" />
     <ClInclude Include="Renderer\Texture.h" />
+    <ClInclude Include="Renderer\TextureUtils.h" />
     <ClInclude Include="Renderer\Transform.h" />
     <ClInclude Include="Renderer\Viewport.h" />
     <ClInclude Include="Renderer\Window.h" />

@@ -7,6 +7,7 @@ using uint64 = long int;
 using uint32 = unsigned int; 
 using int32 = int;
 using uint = uint32;
+using uint8 = unsigned char;
 
 #define RENDERER_OPENGL
 //#define RENDERER_VULKEN

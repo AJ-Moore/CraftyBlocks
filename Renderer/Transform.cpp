@@ -195,11 +195,6 @@ namespace CraftyBlocks
 		return m_parent;
 	}
 
-	//UEntity* Transform::getParentEntity()
-	//{
-	//	return m_entity;
-	//}
-
 	void Transform::UpdateLocalTransform()
 	{
 		m_localTransform = glm::translate(glm::mat4(1.0f), m_position);

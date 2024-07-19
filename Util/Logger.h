@@ -11,6 +11,7 @@ namespace CraftyBlocks
 	public:
 		enum LogLevel
 		{
+			VERBOSE,
 			DEBUG,
 			INFO,
 			WARN,

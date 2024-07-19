@@ -12,6 +12,6 @@ namespace CraftyBlocks
 		std::shared_ptr<Texture> GetTexture(const std::string& path);
 
 	private:
-		std::unordered_map<std::string, Texture> m_textures;
+		std::unordered_map<std::string, std::shared_ptr<Texture>> m_textures;
 	};
 }
