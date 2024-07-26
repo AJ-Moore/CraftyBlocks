@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Util/Logger.h>
-#include <Util/UID.h>
+#include <cstdint>
 
-using uint64 = long int;
+using uint64 = uint64_t;
 using uint32 = unsigned int; 
 using int32 = int;
 using uint = uint32;

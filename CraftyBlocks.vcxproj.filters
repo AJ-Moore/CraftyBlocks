@@ -34,6 +34,9 @@
     <Filter Include="Source Files\Core\ResourceManager">
       <UniqueIdentifier>{1a8ccf95-7d3e-423d-8742-94acc87586ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Renderer\Lighting">
+      <UniqueIdentifier>{4ce785bf-408b-412b-8966-2ce51ad3db44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CraftyBlocks.cpp">
@@ -88,6 +91,21 @@
       <Filter>Source Files\Core\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Viewport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -196,6 +214,24 @@
     </ClInclude>
     <ClInclude Include="Renderer\TextureUtils.h">
       <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Rect.h">
+      <Filter>Source Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Lighting\Light.h">
+      <Filter>Source Files\Renderer\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Lighting\PointLight.h">
+      <Filter>Source Files\Renderer\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Lighting\SpotLight.h">
+      <Filter>Source Files\Renderer\Lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Lighting\DirectionalLight.h">
+      <Filter>Source Files\Renderer\Lighting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

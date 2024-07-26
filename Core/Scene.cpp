@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include <Common.h>
+#include <Core/Entity.h>
 
 namespace CraftyBlocks
 {
@@ -41,19 +42,28 @@ namespace CraftyBlocks
 
 		if (queue != m_renderQueue.end())
 		{
-			auto iter = queue->second.find(entity->UUID.getID());
+			auto iter = queue->second.find(entity->GetUID());
 
 			if (iter != queue->second.end())
 			{
-				m_renderQueue[entity->GetRenderPriority()].insert(std::make_pair(entity->UUID.getID(), entity));
-				queue->second.erase(entity->UUID.getID());
-				entity->m_currentsRenderPriority = m_renderPriority;
+				m_renderQueue[entity->GetRenderPriority()].insert(std::make_pair(entity->GetUID(), entity));
+				queue->second.erase(entity->GetUID());
+				entity->m_currentsRenderPriority = entity->m_renderPriority;
 			}
 		}
 		else
 		{
 			Log(Logger::WARN, "Unable to update render queue.");
 		}
+	}
+
+	bool Scene::Init()
+	{
+		return false;
+	}
+
+	void Scene::Unload()
+	{
 	}
 
 	void Scene::Render()

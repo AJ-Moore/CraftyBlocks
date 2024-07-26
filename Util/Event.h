@@ -1,5 +1,8 @@
 #pragma once
 
+#include <functional>
+#include <vector>
+
 namespace CraftyBlocks
 {
 	template <typename... Args>

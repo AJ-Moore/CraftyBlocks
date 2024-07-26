@@ -25,6 +25,9 @@ namespace CraftyBlocks
 		virtual void BindUniformBuffer(const std::string& name, uint32 buffer) const;
 		virtual void BindTextureBufferObject(const std::string& name, uint32 textureUnit) const;
 		virtual void SetUniformSampler2DTextureUnit(const std::string& Sampler2DName, int32 Location) const;
+		virtual void BindShaderStorageBuffer(const std::string& name, uint32 buffer) const;
+		virtual void SetUniformSampler2DTextureUnit(int32 location, int32 textureUnit) const;
+		virtual GLint GetUniformLocation(const std::string& name) const;
 
 		GLint GetProgram() const { return m_shaderProgram; }
 	protected:

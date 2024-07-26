@@ -89,12 +89,12 @@ namespace CraftyBlocks
 
 	template <class T, class... Arguments>
 	std::shared_ptr<T> Entity::AddComponent(Arguments&&... _Args) {
-		if (!std::is_base_of<UComponent, T>::value) {
-			LogError("Invalid type identifier.");
+		if (!std::is_base_of<Component, T>::value) {
+			Log(Logger::ERROR, "Invalid type identifier.");
 			return nullptr;
 		}
 
-		SharedPtr<T> componentToAdd = std::make_shared<T>(_Args...);
+		std::shared_ptr<T> componentToAdd = std::make_shared<T>(_Args...);
 		addComponent(componentToAdd);
 
 		return componentToAdd;
@@ -103,12 +103,12 @@ namespace CraftyBlocks
 	template<typename T>
 	inline std::vector<std::shared_ptr<T>> Entity::GetComponentsInChildren()
 	{
-		std::vector<SharedPtr<T>> components;
+		std::vector<std::shared_ptr<T>> components;
 
 		for (auto& child : m_children)
 		{
-			std::vector<SharedPtr<T>> childComponents = child.second->getComponentsInChildren<T>();
-			std::vector<SharedPtr<T>> currentComponents = child.second->getComponents<T>();
+			std::vector<std::shared_ptr<T>> childComponents = child.second->GetComponentsInChildren<T>();
+			std::vector<std::shared_ptr<T>> currentComponents = child.second->GetComponents<T>();
 			components.insert(components.end(), childComponents.begin(), childComponents.end());
 			components.insert(components.end(), currentComponents.begin(), currentComponents.end());
 		}
@@ -119,7 +119,7 @@ namespace CraftyBlocks
 	template<typename T>
 	inline std::shared_ptr<T> Entity::GetComponent()
 	{
-		for (SharedPtr<UComponent> component : m_components)
+		for (std::shared_ptr<Component> component : m_components)
 		{
 			if (typeid(T) == typeid(*component.get()))
 			{
@@ -133,9 +133,9 @@ namespace CraftyBlocks
 	template<typename T>
 	inline std::vector<std::shared_ptr<T>> Entity::GetComponents()
 	{
-		std::vector<SharedPtr<T>> components;
+		std::vector<std::shared_ptr<T>> components;
 
-		for (SharedPtr<UComponent> component : m_components)
+		for (std::shared_ptr<Component> component : m_components)
 		{
 			if (typeid(T) == typeid(*component.get()))
 			{
@@ -143,7 +143,7 @@ namespace CraftyBlocks
 			}
 		}
 
-		for (SharedPtr<UComponent> component : m_componentsToAdd)
+		for (std::shared_ptr<Component> component : m_componentsPendingAdd)
 		{
 			if (typeid(T) == typeid(*component.get()))
 			{

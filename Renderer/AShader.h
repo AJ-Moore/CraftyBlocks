@@ -12,7 +12,7 @@ namespace CraftyBlocks
 		Geometry
 	};
 
-	class AShader : GameObject
+	class AShader : public GameObject
 	{
 	public:
 		virtual void Bind() = 0;

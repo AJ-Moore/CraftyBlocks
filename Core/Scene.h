@@ -2,12 +2,14 @@
 
 #include <memory>
 #include <unordered_map>
-#include <Core/Entity.h>
+#include <Core/GameObject.h>
 #include <map>
 
 namespace CraftyBlocks
 {
-	class Scene : protected IManagedObject
+	class Entity;
+
+	class Scene : protected GameObject
 	{
 	public: 
 		void AddEntity(const std::shared_ptr<Entity>& entity);

@@ -3,6 +3,7 @@
 #include <Common.h>
 #include <Core/ResourceManager/Resource.h>
 #include <Renderer/TextureUtils.h>
+#include <vector>
 
 namespace CraftyBlocks
 {
@@ -10,6 +11,7 @@ namespace CraftyBlocks
 	{
 		friend class ResourceManager;
 	public:
+		virtual void Bind();
 		virtual void Bind(uint textureUnit);
 	protected:
 		virtual void LoadResource(std::string path);

@@ -1,6 +1,7 @@
 #pragma once
 
-#include <Core/Interface/IManagedObject.h>
+#include <Core/GameObject.h>
+#include <Renderer/Transform.h>
 #include <Util/Event.h>
 
 namespace CraftyBlocks
@@ -8,6 +9,8 @@ namespace CraftyBlocks
 	class Component : public GameObject
 	{
 		friend class Entity;
+	public:
+		std::shared_ptr<Transform> GetTransform();
 	protected:
 		virtual bool Init() override;
 		virtual void Unload() override;

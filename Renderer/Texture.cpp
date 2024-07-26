@@ -1,4 +1,10 @@
 #include "Texture.h"
+#include <filesystem>
+
+void CraftyBlocks::Texture::Bind()
+{
+	glBindTexture(GL_TEXTURE_2D, m_textureID);
+}
 
 void CraftyBlocks::Texture::Bind(uint textureUnit)
 {
@@ -97,7 +103,7 @@ GLint CraftyBlocks::Texture::GetTextureFormat(SDL_Surface* image)
 	if (image == nullptr)
 	{
 		Log(Logger::ERROR, "Unable to get texture format.");
-		return;
+		return GL_RGBA;
 	}
 
 	switch (image->format->BytesPerPixel)

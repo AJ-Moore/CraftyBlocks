@@ -10,13 +10,41 @@ namespace CraftyBlocks
 
     bool Services::Init()
     {
-        return false;
+        m_time = std::make_shared<Time>();
+        m_renderer = std::make_shared<Renderer>();
+
+        m_services.emplace(m_time->GetUID(), m_time);
+        m_services.emplace(m_renderer->GetUID(), m_renderer);
+
+        for (auto& service : m_services)
+        {
+            service.second->Init();
+        }
+
+        return true;
     }
 
     void Services::Unload()
     {
+        for (auto& service : m_services)
+        {
+            service.second->Unload();
+        }
     }
+
     void Services::Update()
     {
+        for (auto& service : m_services)
+        {
+            service.second->Update();
+        }
+    }
+
+    void Services::Render()
+    {
+        for (auto& service : m_services)
+        {
+            service.second->Render();
+        }
     }
 }

@@ -3,6 +3,7 @@
 #include <Common.h>
 #include <Renderer/Texture.h>
 #include <unordered_map>
+#include <memory>
 
 namespace CraftyBlocks
 {

@@ -8,6 +8,8 @@ namespace CraftyBlocks
 		void Start();
 	private:
 		void GameLoop();
+		void Init();
+		void Unload();
 		void Update(); 
 		void Render();
 

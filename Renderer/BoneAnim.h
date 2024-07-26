@@ -50,10 +50,10 @@ namespace CraftyBlocks
 		const std::vector<QuatKey>& GetRotationKeys() { return m_rotationKeys; }
 		const std::vector<VectorKey>& GetScaleKeys() { return m_scalingKeys; }
 
-		std::string getName() { return m_boneName; }
-		int getId() { return m_boneId; }
-		int getParentId() { return m_parentBoneId; }
-		glm::vec3 getBoneOrigin() { return m_boneOrigin; }
+		std::string GetName() { return m_boneName; }
+		int GetId() { return m_boneId; }
+		int GetParentId() { return m_parentBoneId; }
+		glm::vec3 GetBoneOrigin() { return m_boneOrigin; }
 	private:
 		// Name of bone animation applies to?
 		std::string m_boneName;

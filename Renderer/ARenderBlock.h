@@ -23,10 +23,10 @@ namespace CraftyBlocks
 
 		virtual void SetDrawMode(PrimitiveMode mode) = 0;
 		virtual void SetMaterial(std::shared_ptr<Material> Material) = 0;
-		void setTransform(std::shared_ptr<Transform> Transform) { m_transform = Transform; }
-		void setMesh(std::shared_ptr<Mesh> Mesh) { m_mesh = Mesh; };
-		void setDirty() { m_bufferDirty = true; }
-		PrimitiveMode getDrawMode() const { return (PrimitiveMode)m_primitiveMode; }
+		void SetTransform(std::shared_ptr<Transform> Transform) { m_transform = Transform; }
+		void SetMesh(std::shared_ptr<Mesh> Mesh) { m_mesh = Mesh; }
+		void SetDirty() { m_bufferDirty = true; }
+		PrimitiveMode GetDrawMode() const { return (PrimitiveMode)m_primitiveMode; }
 	protected:
 		/// Dumps the vertex data to the buffer
 		virtual void DumpBufferData() {};

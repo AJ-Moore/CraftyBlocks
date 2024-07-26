@@ -4,6 +4,7 @@
 #include <Core/Services/Services.h>
 #include <Renderer/Bone.h>
 #include <unordered_map>
+#include <Renderer/Lighting/SpotLight.h>
 
 #ifdef RENDERER_OPENGL
 namespace CraftyBlocks
@@ -47,14 +48,14 @@ namespace CraftyBlocks
 
 		if (m_material)
 		{
-			m_material->bind();
+			m_material->Bind();
 
 			if (m_mesh->m_animationsRef != nullptr)
 			{
 				if (m_mesh->m_animationsRef->size() > 0)
 				{
-					float time = Services::GetTime();
-					m_material->getShader().setUniformfv("animationTimeElapsed", time);
+					float time = Services::GetTime()->GetTimeElapsed();
+					m_material->GetShader()->SetUniformfv("animationTimeElapsed", time);
 
 					int count = 0;
 
@@ -63,8 +64,8 @@ namespace CraftyBlocks
 					{
 						if (m_animationBuffer)
 						{
-							m_material->getShader().bindShaderStorageBuffer("Animations", m_animationBuffer);
-							m_material->getShader().setUniform1i("animationCount", anim->getBoneAnimations().size());
+							m_material->GetShader()->BindShaderStorageBuffer("Animations", m_animationBuffer);
+							m_material->GetShader()->SetUniform1i("animationCount", anim->getBoneAnimations().size());
 						}
 
 						for (std::shared_ptr<BoneAnim> boneAnim : anim->getBoneAnimations())
@@ -88,14 +89,14 @@ namespace CraftyBlocks
 									index = 0;
 								}
 
-								m_material->getShader().setUniformVec4(posKeyKey, boneAnim->GetPositionKeys()[index + i].Value);
-								m_material->getShader().setUniformfv(posKeyTime, boneAnim->GetPositionKeys()[index + i].Time);
+								m_material->GetShader()->SetUniformVec4(posKeyKey, boneAnim->GetPositionKeys()[index + i].Value);
+								m_material->GetShader()->SetUniformfv(posKeyTime, boneAnim->GetPositionKeys()[index + i].Time);
 
-								m_material->getShader().setUniformVec4(rotationKeyKey, boneAnim->GetRotationKeys()[index + i].Value);
-								m_material->getShader().setUniformfv(rotationKeyTime, boneAnim->GetRotationKeys()[index + i].Time);
+								m_material->GetShader()->SetUniformVec4(rotationKeyKey, boneAnim->GetRotationKeys()[index + i].Value);
+								m_material->GetShader()->SetUniformfv(rotationKeyTime, boneAnim->GetRotationKeys()[index + i].Time);
 
-								m_material->getShader().setUniformVec4(scaleKeyKey, boneAnim->GetScaleKeys()[index + i].Value);
-								m_material->getShader().setUniformfv(scaleKeyTime, boneAnim->GetScaleKeys()[index + i].Time);
+								m_material->GetShader()->SetUniformVec4(scaleKeyKey, boneAnim->GetScaleKeys()[index + i].Value);
+								m_material->GetShader()->SetUniformfv(scaleKeyTime, boneAnim->GetScaleKeys()[index + i].Time);
 							}
 
 							count++;
@@ -106,16 +107,17 @@ namespace CraftyBlocks
 				}
 			}
 
-			if (m_renderer->isShadowPass())
+			if (m_renderer->IsShadowPass())
 			{
-				Light* activeLightSource = m_renderer->getActiveLight();
+				Light* activeLightSource = m_renderer->GetActiveLight();
 				float near_plane = 0.1f, far_plane = 1000.0f;
 				glm::mat4 lightProjection;
 
 				// Spot light projection
-				if (activeLightSource->getLightType() == LightType::Spot)
+				if (activeLightSource->GetLightType() == LightType::Spot)
 				{
-					lightProjection = glm::perspectiveLH(activeLightSource->getApature() * 2, 1.0f, near_plane, far_plane);
+					SpotLight* spotLight = (SpotLight*)activeLightSource;
+					lightProjection = glm::perspectiveLH(spotLight->GetApature() * 2, 1.0f, near_plane, far_plane);
 				}
 				else
 				{
@@ -123,22 +125,22 @@ namespace CraftyBlocks
 				}
 
 				// Get active light and work out view matrix 
-				glm::vec3 position = activeLightSource->getTransform()->getWorldPosition();
-				glm::vec3 up = activeLightSource->getTransform()->getUp();
-				glm::vec3 forward = activeLightSource->getTransform()->getForward();
+				glm::vec3 position = activeLightSource->GetTransform()->GetWorldPosition();
+				glm::vec3 up = activeLightSource->GetTransform()->GetUp();
+				glm::vec3 forward = activeLightSource->GetTransform()->GetForward();
 
 				glm::mat4 view = glm::lookAtLH(position, position + forward, up);
 
-				m_material->getShader().setUniformBool(m_shadowUniform, true);
+				m_material->GetShader()->SetUniformBool(m_shadowUniform, true);
 
 				//m_material->getShader().uniformMat4fv("wvpMat", 1, false,
 				//	m_renderer->getActiveCamera()->getProjMatrix() * m_renderer->getActiveCamera()->getViewMatrix() * m_transform->getWorldMatrix());
 
 				//m_material->getShader().uniformMat4fv(m_shadowMat, 1, false,
 				//	lightProjection * view * m_transform->getWorldMatrix());
-				m_material->getShader().uniformMat4fv(m_viewUniform, 1, false, view);
-				m_material->getShader().uniformMat4fv(m_modelUniform, 1, false, m_transform->getWorldMatrix());
-				m_material->getShader().uniformMat4fv(m_projUniform, 1, false, lightProjection);
+				m_material->GetShader()->SetUniformMat4fv(m_viewUniform, 1, false, view);
+				m_material->GetShader()->SetUniformMat4fv(m_modelUniform, 1, false, m_transform->GetWorldMatrix());
+				m_material->GetShader()->SetUniformMat4fv(m_projUniform, 1, false, lightProjection);
 			}
 			else
 			{
@@ -149,14 +151,14 @@ namespace CraftyBlocks
 					//m_material->getShader().uniformMat4fv("wvpMat", 1, false,
 					//	m_renderer->getActiveCamera()->getProjMatrix() * m_renderer->getActiveCamera()->getViewMatrix() * m_transform->getWorldMatrix());
 
-					m_material->getShader().uniformMat4fv(m_modelUniform, 1, false, m_transform->getWorldMatrix());
-					m_material->getShader().uniformMat4fv(m_viewUniform, 1, false, m_renderer->getActiveCamera()->getViewMatrix());
-					m_material->getShader().uniformMat4fv(m_projUniform, 1, false, m_renderer->getActiveCamera()->getProjMatrix());
+					m_material->GetShader()->SetUniformMat4fv(m_modelUniform, 1, false, m_transform->GetWorldMatrix());
+					m_material->GetShader()->SetUniformMat4fv(m_viewUniform, 1, false, m_renderer->GetActiveCamera()->GetViewMatrix());
+					m_material->GetShader()->SetUniformMat4fv(m_projUniform, 1, false, m_renderer->GetActiveCamera()->GetProjMatrix());
 				}
 
-				m_material->getShader().setUniformBool(m_shadowUniform, false);
-				m_material->getShader().setUniformVec3(m_cameraUniform, m_renderer->getActiveCamera()->getTransform()->getWorldPosition());
-				m_material->getShader().setUniformVec3(m_cameraLook, m_renderer->getActiveCamera()->getTransform()->getForward());
+				m_material->GetShader()->SetUniformBool(m_shadowUniform, false);
+				m_material->GetShader()->SetUniformVec3(m_cameraUniform, m_renderer->GetActiveCamera()->GetTransform()->getWorldPosition());
+				m_material->GetShader()->SetUniformVec3(m_cameraLook, m_renderer->GetActiveCamera()->GetTransform()->getForward());
 			}
 		}
 		else
@@ -167,7 +169,7 @@ namespace CraftyBlocks
 		// should not do blending here/ or use depth test here
 		// See renderqueue in scene (sets depth test)
 
-		if (m_mesh->shouldRenderBackFaces())
+		if (m_mesh->ShouldRenderBackFaces())
 		{
 			glDisable(GL_CULL_FACE);
 		}
@@ -176,8 +178,8 @@ namespace CraftyBlocks
 			glEnable(GL_CULL_FACE);
 		}
 
-		size_t textureBufferSize = m_mesh->getTextureBufferSize();
-		size_t texture3dBufferSize = m_mesh->getTexture3dBufferSize();
+		size_t textureBufferSize = m_mesh->GetTextureBufferSize();
+		size_t texture3dBufferSize = m_mesh->GetTexture3dBufferSize();
 		if (textureBufferSize == 0 && texture3dBufferSize == 0)
 		{
 			//m_material->getShader().setUniformBool("hasDiffuseMap", false);
@@ -240,58 +242,58 @@ namespace CraftyBlocks
 		glBindVertexArray(m_vertexArrayObject);
 		glBindBuffer(GL_ARRAY_BUFFER, m_bufferId);
 
-		const Shader shader = m_material->getShader();
+		Shader* shader = m_material->GetShader();
 
 		/// buffer offsets
-		size_t vertexBufferSize = m_mesh->getVertexBufferSize();
-		size_t textureBufferSize = m_mesh->getTextureBufferSize();
-		size_t texture3dBufferSize = m_mesh->getTexture3dBufferSize();
-		size_t colourBufferSize = m_mesh->getColourBufferSize();
-		size_t tangentBufferSize = m_mesh->getTangentBufferSize();
-		size_t biTangentBufferSize = m_mesh->getBiTangentBufferSize();
-		size_t normalBufferSize = m_mesh->getNormalBufferSize();
-		size_t weightSize = m_mesh->getWeightBufferSize();
+		size_t vertexBufferSize = m_mesh->GetVertexBufferSize();
+		size_t textureBufferSize = m_mesh->GetTextureBufferSize();
+		size_t texture3dBufferSize = m_mesh->GetTexture3dBufferSize();
+		size_t colourBufferSize = m_mesh->GetColourBufferSize();
+		size_t tangentBufferSize = m_mesh->GetTangentBufferSize();
+		size_t biTangentBufferSize = m_mesh->GetBiTangentBufferSize();
+		size_t normalBufferSize = m_mesh->GetNormalBufferSize();
+		size_t weightSize = m_mesh->GetWeightBufferSize();
 
 		size_t tBufferSize = (texture3dBufferSize) ? texture3dBufferSize : textureBufferSize;
 
 		// vertex positions
-		VertexAttribPointer(shader.getProgram(), shader.VertexPositionAtrib, Vec3Size(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+		VertexAttribPointer(shader->GetProgram(), shader->VertexPositionAtrib, Vec3Size(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
 
 		if (texture3dBufferSize)
 		{
-			VertexAttribPointer(shader.getProgram(), shader.UVSAtrib, Vec3Size(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * vertexBufferSize));
+			VertexAttribPointer(shader->GetProgram(), shader->UVSAtrib, Vec3Size(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * vertexBufferSize));
 		}
 		else
 		{
-			VertexAttribPointer(shader.getProgram(), shader.UVSAtrib, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * vertexBufferSize));
+			VertexAttribPointer(shader->GetProgram(), shader->UVSAtrib, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * vertexBufferSize));
 		}
 
-		VertexAttribPointer(shader.getProgram(), shader.ColourAtrib, 4, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * (vertexBufferSize + tBufferSize)));
-		VertexAttribPointer(shader.getProgram(), shader.NormalAtrib, Vec3Size(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * (vertexBufferSize + tBufferSize + colourBufferSize)));
-		VertexAttribPointer(shader.getProgram(), shader.TangentAtrib, Vec3Size(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * (vertexBufferSize + tBufferSize + colourBufferSize + normalBufferSize)));
-		VertexAttribPointer(shader.getProgram(), shader.BiTangentAtrib, Vec3Size(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * (vertexBufferSize + tBufferSize + colourBufferSize + normalBufferSize + tangentBufferSize)));
-		VertexAttribPointer(shader.getProgram(), shader.WeightsAtrib, 4, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * (vertexBufferSize + tBufferSize + colourBufferSize + normalBufferSize + tangentBufferSize + biTangentBufferSize)));
-		VertexAttribPointer(shader.getProgram(), shader.BoneIdAtrib, 4, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * (vertexBufferSize + tBufferSize + colourBufferSize + normalBufferSize + tangentBufferSize + biTangentBufferSize + weightSize)));
+		VertexAttribPointer(shader->GetProgram(), shader->ColourAtrib, 4, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * (vertexBufferSize + tBufferSize)));
+		VertexAttribPointer(shader->GetProgram(), shader->NormalAtrib, Vec3Size(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * (vertexBufferSize + tBufferSize + colourBufferSize)));
+		VertexAttribPointer(shader->GetProgram(), shader->TangentAtrib, Vec3Size(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * (vertexBufferSize + tBufferSize + colourBufferSize + normalBufferSize)));
+		VertexAttribPointer(shader->GetProgram(), shader->BiTangentAtrib, Vec3Size(), GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * (vertexBufferSize + tBufferSize + colourBufferSize + normalBufferSize + tangentBufferSize)));
+		VertexAttribPointer(shader->GetProgram(), shader->WeightsAtrib, 4, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * (vertexBufferSize + tBufferSize + colourBufferSize + normalBufferSize + tangentBufferSize + biTangentBufferSize)));
+		VertexAttribPointer(shader->GetProgram(), shader->BoneIdAtrib, 4, GL_FLOAT, GL_FALSE, 0, (GLvoid*)(sizeof(float) * (vertexBufferSize + tBufferSize + colourBufferSize + normalBufferSize + tangentBufferSize + biTangentBufferSize + weightSize)));
 
-		EnableVertexAttribArray(shader.getProgram(), shader.VertexPositionAtrib);
-		EnableVertexAttribArray(shader.getProgram(), shader.UVSAtrib);
-		EnableVertexAttribArray(shader.getProgram(), shader.NormalAtrib);
-		EnableVertexAttribArray(shader.getProgram(), shader.TangentAtrib);
-		EnableVertexAttribArray(shader.getProgram(), shader.BiTangentAtrib);
-		EnableVertexAttribArray(shader.getProgram(), shader.WeightsAtrib);
-		EnableVertexAttribArray(shader.getProgram(), shader.BoneIdAtrib);
+		EnableVertexAttribArray(shader->GetProgram(), shader->VertexPositionAtrib);
+		EnableVertexAttribArray(shader->GetProgram(), shader->UVSAtrib);
+		EnableVertexAttribArray(shader->GetProgram(), shader->NormalAtrib);
+		EnableVertexAttribArray(shader->GetProgram(), shader->TangentAtrib);
+		EnableVertexAttribArray(shader->GetProgram(), shader->BiTangentAtrib);
+		EnableVertexAttribArray(shader->GetProgram(), shader->WeightsAtrib);
+		EnableVertexAttribArray(shader->GetProgram(), shader->BoneIdAtrib);
 
 		glBindVertexArray(0);
 
 		LogGraphicsErrors();
 	}
 
-	void RenderBlock::SetMaterial(std::shared_ptr<Material> Material)
+	void RenderBlock::SetMaterial(const std::shared_ptr<Material>& Material)
 	{
 		m_material = Material;
-		m_shadowMat = m_material->GetShader().getUniformLocation("wvpShadowMat");
-		m_modelUniform = m_material->GetShader().getUniformLocation("modelMat");
-		m_viewUniform = m_material->GetShader().getUniformLocation("viewMat");
+		m_shadowMat = m_material->GetShader()->GetUniformLocation("wvpShadowMat");
+		m_modelUniform = m_material->GetShader()->GetUniformLocation("modelMat");
+		m_viewUniform = m_material->GetShader()->GetUniformLocation("viewMat");
 		m_projUniform = m_material->GetShader().getUniformLocation("projMat");
 		m_shadowUniform = m_material->GetShader().getUniformLocation("shadowPass");
 		m_cameraUniform = m_material->GetShader().getUniformLocation("cameraPosition");
@@ -331,19 +333,19 @@ namespace CraftyBlocks
 	void RenderBlock::DumpAnimationData()
 	{
 		// temporary hack
-		if (std::find(dumpedAnimData.begin(), dumpedAnimData.end(), m_material->getShader().UUID.getID()) != dumpedAnimData.end())
+		if (std::find(dumpedAnimData.begin(), dumpedAnimData.end(), m_material->GetShader()->GetUID().GetID()) != dumpedAnimData.end())
 		{
 			return;
 		}
 
-		dumpedAnimData.push_back(m_material->getShader().UUID.getID());
+		dumpedAnimData.push_back(m_material->GetShader()->GetUID().GetID());
 
 		// hack to be refactored 
 		if (m_animationBuffer && m_mesh->m_animationsRef != nullptr)
 		{
-			m_material->getShader().bindProgram();
-			m_material->getShader().bindShaderStorageBuffer("Animations", m_animationBuffer);
-			m_material->getShader().setUniform1i("animationCount", m_animationSize);
+			m_material->GetShader()->BindProgram();
+			m_material->GetShader()->BindShaderStorageBuffer("Animations", m_animationBuffer);
+			m_material->GetShader()->setUniform1i("animationCount", m_animationSize);
 			return;
 		}
 
@@ -362,7 +364,7 @@ namespace CraftyBlocks
 				int count = 0;
 
 				// Populate animations
-				for (std::shared_ptr<UAnimation> anim : *m_mesh->m_animationsRef)
+				for (std::shared_ptr<Animation> anim : *m_mesh->m_animationsRef)
 				{
 					animations.resize(anim->getBoneAnimations().size());
 
@@ -374,17 +376,17 @@ namespace CraftyBlocks
 					// Needs updating to support multiple animations
 					for (std::shared_ptr<BoneAnim> boneAnim : anim->getBoneAnimations())
 					{
-						animations[count].Duration = anim->getDuration();
-						animations[count].TicksPerSecond = anim->getTicksPerSecond();
-						animations[count].BoneId = boneAnim->getId();
+						animations[count].Duration = anim->GetDuration();
+						animations[count].TicksPerSecond = anim->GetTicksPerSecond();
+						animations[count].BoneId = boneAnim->GetId();
 
 						for (auto& bone : *m_mesh->m_bones)
 						{
-							if (bone->getBoneId() == boneAnim->getId())
+							if (bone->GetBoneId() == boneAnim->GetId())
 							{
 								//Print("alignment %i", alignof(glm::vec3));
-								animations[count].OffsetMatrix = bone->getOffsetMatrix();
-								animations[count].ParentBoneId = bone->getParentBoneId();
+								animations[count].OffsetMatrix = bone->GetOffsetMatrix();
+								animations[count].ParentBoneId = bone->GetParentBoneId();
 								break;
 							}
 						}
@@ -449,12 +451,12 @@ namespace CraftyBlocks
 
 		m_animationSize = animations.size();
 
-		m_material->getShader().bindProgram();
+		m_material->GetShader()->Bind();
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_animationBuffer);
 		glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(AnimationData) * animations.size(), &(animations[0]), GL_STATIC_DRAW);
 
-		m_material->getShader().bindShaderStorageBuffer("Animations", m_animationBuffer);
-		m_material->getShader().setUniform1i("animationCount", animations.size());
+		m_material->GetShader()->BindShaderStorageBuffer("Animations", m_animationBuffer);
+		m_material->GetShader()->SetUniform1i("animationCount", animations.size());
 
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 		LogGraphicsErrors();
