@@ -5,6 +5,7 @@
 #include <Renderer/Bone.h>
 #include <unordered_map>
 #include <Renderer/Lighting/SpotLight.h>
+#include <Renderer/AnimationData.h>
 
 #ifdef RENDERER_OPENGL
 namespace CraftyBlocks
@@ -157,8 +158,8 @@ namespace CraftyBlocks
 				}
 
 				m_material->GetShader()->SetUniformBool(m_shadowUniform, false);
-				m_material->GetShader()->SetUniformVec3(m_cameraUniform, m_renderer->GetActiveCamera()->GetTransform()->getWorldPosition());
-				m_material->GetShader()->SetUniformVec3(m_cameraLook, m_renderer->GetActiveCamera()->GetTransform()->getForward());
+				m_material->GetShader()->SetUniformVec3(m_cameraUniform, m_renderer->GetActiveCamera()->GetTransform()->GetWorldPosition());
+				m_material->GetShader()->SetUniformVec3(m_cameraLook, m_renderer->GetActiveCamera()->GetTransform()->GetForward());
 			}
 		}
 		else
@@ -294,10 +295,10 @@ namespace CraftyBlocks
 		m_shadowMat = m_material->GetShader()->GetUniformLocation("wvpShadowMat");
 		m_modelUniform = m_material->GetShader()->GetUniformLocation("modelMat");
 		m_viewUniform = m_material->GetShader()->GetUniformLocation("viewMat");
-		m_projUniform = m_material->GetShader().getUniformLocation("projMat");
-		m_shadowUniform = m_material->GetShader().getUniformLocation("shadowPass");
-		m_cameraUniform = m_material->GetShader().getUniformLocation("cameraPosition");
-		m_cameraLook = m_material->GetShader().getUniformLocation("cameraLook");
+		m_projUniform = m_material->GetShader()->GetUniformLocation("projMat");
+		m_shadowUniform = m_material->GetShader()->GetUniformLocation("shadowPass");
+		m_cameraUniform = m_material->GetShader()->GetUniformLocation("cameraPosition");
+		m_cameraLook = m_material->GetShader()->GetUniformLocation("cameraLook");
 	}
 
 	void RenderBlock::VertexAttribPointer(GLuint shaderProgram, std::string name, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer)
@@ -343,9 +344,9 @@ namespace CraftyBlocks
 		// hack to be refactored 
 		if (m_animationBuffer && m_mesh->m_animationsRef != nullptr)
 		{
-			m_material->GetShader()->BindProgram();
+			m_material->GetShader()->Bind();
 			m_material->GetShader()->BindShaderStorageBuffer("Animations", m_animationBuffer);
-			m_material->GetShader()->setUniform1i("animationCount", m_animationSize);
+			m_material->GetShader()->SetUniform1i("animationCount", m_animationSize);
 			return;
 		}
 

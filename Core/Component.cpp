@@ -1,11 +1,16 @@
-#include "Component.h"
+#include <Core/Component.h>
+#include <Renderer/Transform.h>
+#include <memory>
 
-std::shared_ptr<Transform> CraftyBlocks::Component::GetTransform()
+namespace CraftyBlocks
 {
-    if (m_parent == nullptr)
+    std::shared_ptr<Transform> Component::GetTransform()
     {
-        return nullptr;
-    }
+        if (m_parent == nullptr)
+        {
+            return nullptr;
+        }
 
-    return m_parent->GetTransform();
+        return m_parent->GetTransform();
+    }
 }

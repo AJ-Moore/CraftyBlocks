@@ -3,4 +3,5 @@
 bool CraftyBlocks::Player::Init()
 {
     Entity::Init();
+    return true;
 }

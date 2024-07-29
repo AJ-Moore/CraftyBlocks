@@ -183,6 +183,7 @@
     <ClInclude Include="Game\Player.h" />
     <ClInclude Include="Game\World.h" />
     <ClInclude Include="Renderer\Animation.h" />
+    <ClInclude Include="Renderer\AnimationData.h" />
     <ClInclude Include="Renderer\ARenderBlock.h" />
     <ClInclude Include="Renderer\AShader.h" />
     <ClInclude Include="Renderer\Bone.h" />

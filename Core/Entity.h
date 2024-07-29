@@ -4,8 +4,8 @@
 #include <Core/Scene.h>
 #include <Core/GameObject.h>
 #include <Core/Component.h>
-#include <queue>
 #include <Renderer/Transform.h>
+#include <queue>
 
 namespace CraftyBlocks
 {

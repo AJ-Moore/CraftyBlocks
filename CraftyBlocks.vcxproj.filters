@@ -233,6 +233,9 @@
     <ClInclude Include="Renderer\Lighting\DirectionalLight.h">
       <Filter>Source Files\Renderer\Lighting</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\AnimationData.h">
+      <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

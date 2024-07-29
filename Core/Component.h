@@ -1,11 +1,13 @@
 #pragma once
 
 #include <Core/GameObject.h>
-#include <Renderer/Transform.h>
 #include <Util/Event.h>
 
 namespace CraftyBlocks
 {
+	class Transform;
+	class Entity;
+
 	class Component : public GameObject
 	{
 		friend class Entity;

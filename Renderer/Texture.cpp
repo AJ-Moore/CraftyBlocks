@@ -133,6 +133,9 @@ GLint CraftyBlocks::Texture::GetTextureFormat(SDL_Surface* image)
 
 GLuint CraftyBlocks::Texture::CreatePinkBlackTexture()
 {
+	GLuint texture; 
+	glGenTextures(1, &texture);
+
 	Log(Logger::VERBOSE, "Creating pink black debug texture.");
 
 	// Write pink/ black missing texture 64X64
@@ -157,6 +160,9 @@ GLuint CraftyBlocks::Texture::CreatePinkBlackTexture()
 	GLvoid* pixelDat = (GLvoid*)(&m_pixelData.front());
 	int dimensions = (int)sqrt(m_pixelData.size());
 
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
 	glTexImage2D(GL_TEXTURE_2D,
 		0,//Mipmap Level
 		GL_RGBA, //bit per pixel
@@ -169,4 +175,6 @@ GLuint CraftyBlocks::Texture::CreatePinkBlackTexture()
 
 	m_width = dimensions;
 	m_height = dimensions;
+
+	return texture;
 }
