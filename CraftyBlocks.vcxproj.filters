@@ -108,6 +108,9 @@
     <ClCompile Include="Core\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer\TextureType.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer\GLRenderBlock.h">
@@ -234,6 +237,9 @@
       <Filter>Source Files\Renderer\Lighting</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\AnimationData.h">
+      <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\TextureType.h">
       <Filter>Source Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>

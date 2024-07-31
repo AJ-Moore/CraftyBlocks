@@ -19,6 +19,8 @@ namespace CraftyBlocks
 
 	void Game::GameLoop()
 	{
+		m_bGameRunning = true;
+
 		while (m_bGameRunning)
 		{
 			Update();
@@ -39,7 +41,6 @@ namespace CraftyBlocks
 	void Game::Update()
 	{
 		SDL_PumpEvents();
-		Services::GetInstance().Init();
 	}
 
 	void Game::Render()

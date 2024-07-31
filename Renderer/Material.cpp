@@ -15,4 +15,9 @@ namespace CraftyBlocks
     {
         return nullptr;
     }
+
+    void Material::LoadResource(std::string path)
+    {
+
+    }
 }

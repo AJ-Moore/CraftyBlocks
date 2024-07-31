@@ -22,8 +22,6 @@ namespace CraftyBlocks {
 		mutable uint64 m_uid;
 		static uint64 m_uuidCount;
 	};
-
-	uint64 UID::m_uuidCount = 0;
 }
 
 template <>

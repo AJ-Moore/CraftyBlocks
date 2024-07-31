@@ -55,7 +55,7 @@ namespace CraftyBlocks
 			{
 				if (m_mesh->m_animationsRef->size() > 0)
 				{
-					float time = Services::GetTime()->GetTimeElapsed();
+					float time = (float)Services::GetTime()->GetTimeElapsed();
 					m_material->GetShader()->SetUniformfv("animationTimeElapsed", time);
 
 					int count = 0;

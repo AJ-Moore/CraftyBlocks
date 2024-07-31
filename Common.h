@@ -31,3 +31,7 @@ using uint8 = unsigned char;
 #define GLM_LEFT_HAND
 #define GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
 #define GLM_FORCE_CTOR_INIT
+
+// JSON 
+#include <nlohmann/json.hpp>
+using namespace nlohmann;

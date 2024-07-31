@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <Core/Services/Time.h>
 #include <Renderer/Renderer.h>
+#include <Renderer/Window.h>
 
 namespace CraftyBlocks
 {
@@ -32,5 +33,6 @@ namespace CraftyBlocks
 
 		std::shared_ptr<Time> m_time;
 		std::shared_ptr<Renderer> m_renderer;
+		std::shared_ptr<Window> m_window;
 	};
 }

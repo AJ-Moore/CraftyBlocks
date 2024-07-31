@@ -3,6 +3,8 @@
 
 namespace CraftyBlocks {
 
+	uint64 UID::m_uuidCount = 0;
+
 	UID::UID()
 	{
 		m_uid = m_uuidCount++;

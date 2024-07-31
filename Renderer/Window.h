@@ -4,16 +4,19 @@
 #include <Renderer/Viewport.h>
 #include <unordered_set>
 #include <Util/Rect.h>
+#include <Core/Services/Service.h>
 
 namespace CraftyBlocks
 {
-	class Window
+	class Window : public Service
 	{
 	public:
 		const SDL_GLContext& GetContext() const { return m_glContext; }
 	protected:
-		virtual void Init();
-		virtual void Render();
+		virtual bool Init() override;
+		virtual void Render() override;
+		virtual void Update() override; 
+		virtual void Unload() override;
 	private:
 
 		SDL_Window* m_sdlWindow = nullptr;

@@ -28,7 +28,7 @@ namespace CraftyBlocks
 		LogLevel m_logLevel = LogLevel::DEBUG;
 	};
 
-	void Log(Logger::LogLevel level, const char* format, ...) {
+	inline void Log(Logger::LogLevel level, const char* format, ...) {
 		va_list args;
 		va_start(args, format);
 		Logger::Log(level, format, args);
@@ -41,7 +41,7 @@ namespace CraftyBlocks
 			: std::runtime_error(message) {}
 	};
 
-	bool LogGraphicsErrors() {
+	inline bool LogGraphicsErrors() {
 #ifdef RENDERER_OPENGL
 		int code = glGetError();
 

@@ -90,6 +90,5 @@ namespace CraftyBlocks
 
 		// This string is used by the animation system to identify this mesh.
 		std::string m_meshAnimName;
-
 	};
 }
