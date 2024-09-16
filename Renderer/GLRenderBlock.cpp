@@ -243,7 +243,7 @@ namespace CraftyBlocks
 		glBindVertexArray(m_vertexArrayObject);
 		glBindBuffer(GL_ARRAY_BUFFER, m_bufferId);
 
-		Shader* shader = m_material->GetShader();
+		ShaderProgram* shader = m_material->GetShader();
 
 		/// buffer offsets
 		size_t vertexBufferSize = m_mesh->GetVertexBufferSize();

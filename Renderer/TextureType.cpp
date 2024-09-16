@@ -30,13 +30,24 @@ namespace CraftyBlocks
 
 	const std::unordered_map<std::string, TextureBindType> TextureData::m_textureBindLookup =
 	{
-		{"None", TextureBindType::NONE},
-		{"UTEXTURE_2D", TextureBindType::TEXTURE_2D},
-		{"UCUBE_MAP", TextureBindType::CUBE_MAP},
-		{"UTEXTURE_ARRAY_2D", TextureBindType::TEXTURE_ARRAY_2D},
-		{"UCOLOUR", TextureBindType::COLOUR},
+		{"none", TextureBindType::None},
+		{"texture_2d", TextureBindType::Texture2D},
+		{"cube_map", TextureBindType::CubeMap},
+		{"texture_array_2d", TextureBindType::TextureArray2D},
+		{"colour", TextureBindType::Colour},
 	};
 
+	const std::unordered_map<std::string, TextureClamp> TextureData::m_textureClampLookup = {
+		{"none", TextureClamp::None},
+		{"clamp", TextureClamp::Clamp},
+		{"repeat", TextureClamp::Repeat}
+	};
+
+	const std::unordered_map<std::string, TextureFilter> TextureData::m_textureFilterLookup = {
+		{"none", TextureFilter::None},
+		{"linear", TextureFilter::Linear},
+		{"nearest", TextureFilter::NearestNeighbour}
+	};
 
 	TextureData::TextureData(TextureType type)
 	{
@@ -83,5 +94,17 @@ namespace CraftyBlocks
 
 		// Might seem unintuitive but in most cases it's safer to fallback to UTexture_2D
 		return "UTexture_2D";
+	}
+
+	TextureBindType TextureData::GetTextureBindType(std::string type)
+	{
+		auto iterator = m_textureBindLookup.find(type);
+
+		if (iterator != m_textureBindLookup.end())
+		{
+			return iterator->second;
+		}
+
+		return TextureBindType::Texture2D;
 	}
 }

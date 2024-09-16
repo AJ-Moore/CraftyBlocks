@@ -12,7 +12,7 @@ void CraftyBlocks::Texture::Bind(uint textureUnit)
 	glBindTexture(GL_TEXTURE_2D, m_textureID);
 }
 
-void CraftyBlocks::Texture::LoadResource(std::string path)
+bool CraftyBlocks::Texture::LoadResource(std::string path)
 {
 	Log(Logger::INFO, "Loading texture [%s]", path.c_str());
 	SDL_Surface* image = nullptr;
@@ -23,7 +23,7 @@ void CraftyBlocks::Texture::LoadResource(std::string path)
 	if (!std::filesystem::exists(fsPath))
 	{
 		Log(Logger::WARN, "Unable to find texture at path [%s]", path);
-		return;
+		return false;
 	}
 
 	try {
@@ -42,7 +42,7 @@ void CraftyBlocks::Texture::LoadResource(std::string path)
 		Log(Logger::ERROR, "Error whilst loading texture [%s].", IMG_GetError());
 		// Use default texture, return 
 		m_textureID = CreatePinkBlackTexture();
-		return;
+		return false;
 	}
 	else
 	{
@@ -96,6 +96,7 @@ void CraftyBlocks::Texture::LoadResource(std::string path)
 
 	SDL_FreeSurface(image);
 	LogGraphicsErrors();
+	return true;
 }
 
 GLint CraftyBlocks::Texture::GetTextureFormat(SDL_Surface* image)
@@ -154,7 +155,7 @@ GLuint CraftyBlocks::Texture::CreatePinkBlackTexture()
 		}
 	}
 
-	m_textureFilter = UTextureFilter::NearestNeighbour;
+	m_textureFilter = TextureFilter::NearestNeighbour;
 
 	// create the surface from our pixel data!
 	GLvoid* pixelDat = (GLvoid*)(&m_pixelData.front());

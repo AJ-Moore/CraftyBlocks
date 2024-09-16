@@ -14,7 +14,7 @@ namespace CraftyBlocks
 		virtual void Bind();
 		virtual void Bind(uint textureUnit);
 	protected:
-		virtual void LoadResource(std::string path);
+		virtual bool LoadResource(std::string path);
 	private:
 		GLint GetTextureFormat(SDL_Surface* image);
 		GLuint CreatePinkBlackTexture();
@@ -22,8 +22,8 @@ namespace CraftyBlocks
 		GLuint m_textureID = 0;
 		uint m_width = 0; 
 		uint m_height = 0;
-		UTextureFilter m_textureFilter = UTextureFilter::Linear;
-		UTextureClamp m_textureClamp = UTextureClamp::Repeat;
+		TextureFilter m_textureFilter = TextureFilter::Linear;
+		TextureClamp m_textureClamp = TextureClamp::Repeat;
 		bool m_bStorePixelData = false;
 		uint32 m_imageFormat = GL_RGBA;
 	};

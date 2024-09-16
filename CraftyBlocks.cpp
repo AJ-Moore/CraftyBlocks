@@ -3,11 +3,15 @@
 
 #include <iostream>
 #include <Game.h>
+#include <Core/ResourceManager/ResourceManager.h>
 
-int main()
+int main(int argc, char* args[])
 {
+    CraftyBlocks::ResourceManager rm;
+    rm.GetMaterial("assets/materials/default.material");
     CraftyBlocks::Game game;
     game.Start();
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

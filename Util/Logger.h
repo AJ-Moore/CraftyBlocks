@@ -19,19 +19,20 @@ namespace CraftyBlocks
 			FATAL
 		};
 
+		static void Log(LogLevel level, const char* format,va_list args, ...);
 		static void Log(LogLevel level, const char* format, ...);
 		static void SetLogLevel(LogLevel level) { Instance().m_logLevel = level; }
 		static Logger& Instance();
 
 	private:
-		void FormatLogMessage(LogLevel level, const std::string& message);
+		static void FormatLogMessage(LogLevel level, const std::string& message);
 		LogLevel m_logLevel = LogLevel::DEBUG;
 	};
 
 	inline void Log(Logger::LogLevel level, const char* format, ...) {
 		va_list args;
 		va_start(args, format);
-		Logger::Log(level, format, args);
+		Logger::Log(level, format, args, args);
 		va_end(args);
 	}
 

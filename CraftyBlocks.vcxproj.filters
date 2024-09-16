@@ -99,7 +99,7 @@
     <ClCompile Include="Renderer\Viewport.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Shader.cpp">
+    <ClCompile Include="Renderer\ShaderProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Renderer.cpp">
@@ -110,6 +110,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\TextureType.cpp">
       <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Shader.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,7 +182,7 @@
     <ClInclude Include="Renderer\Material.h">
       <Filter>Source Files\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Shader.h">
+    <ClInclude Include="Renderer\ShaderProgram.h">
       <Filter>Source Files\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Core\Services\Time.h">
@@ -240,6 +243,9 @@
       <Filter>Source Files\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\TextureType.h">
+      <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Shader.h">
       <Filter>Source Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>

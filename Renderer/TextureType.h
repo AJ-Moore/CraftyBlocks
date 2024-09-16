@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Renderer/TextureUtils.h>
+
 namespace CraftyBlocks
 {
 	enum class TextureType
@@ -26,11 +28,11 @@ namespace CraftyBlocks
 	};
 
 	enum class TextureBindType {
-		TEXTURE_2D,
-		TEXTURE_ARRAY_2D,
-		CUBE_MAP,
-		COLOUR,
-		NONE
+		Texture2D,
+		TextureArray2D,
+		CubeMap,
+		Colour,
+		None
 	};
 
 	class TextureData
@@ -45,10 +47,13 @@ namespace CraftyBlocks
 		std::string GetShaderVariable() const { return m_shaderVariable; }
 		TextureType GetTextureType() const { return m_textureType; }
 		static std::string GetStringTypeForBindType(TextureBindType bindType);
+		static TextureBindType GetTextureBindType(std::string);
 
 	private:
 		static const std::unordered_map<std::string, TextureType> m_textureLookup;
 		static const std::unordered_map<std::string, TextureBindType> m_textureBindLookup;
+		static const std::unordered_map<std::string, TextureClamp> m_textureClampLookup;
+		static const std::unordered_map<std::string, TextureFilter> m_textureFilterLookup;
 		std::string m_shaderVariable;
 		std::string m_path;
 		TextureType m_textureType;

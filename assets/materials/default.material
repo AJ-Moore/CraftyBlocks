@@ -1,14 +1,13 @@
 {
     "type": "TEXTURE_2D",
-    "shaders":{
+    "shaders": {
         "vertex": "assets/shaders/default.vertex",
         "fragment": "asset/shaders/default.fragment"
-    }
-    "textures":
-    {
-        "diffuse":{
-            "name":"diffuseMap",
-            "path":"",
+    },
+    "textures": {
+        "diffuse": {
+            "name": "diffuseMap",
+            "path": ""
         }
     }
 }

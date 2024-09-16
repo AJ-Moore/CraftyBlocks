@@ -3,6 +3,27 @@
 
 namespace CraftyBlocks
 {
+	const std::unordered_map<std::string, ShaderType> AShader::m_shaderTypeLookup =
+	{
+		{"None", ShaderType::None},
+		{"Fragment", ShaderType::Fragment},
+		{"Vertex", ShaderType::Vertex},
+		{"Geometry", ShaderType::Geometry},
+	};
+
+	ShaderType AShader::GetShaderType(std::string type)
+	{
+		std::string ltype = StringUtil::ToLower(type);
+		auto iterator = m_shaderTypeLookup.find(ltype);
+
+		if (iterator != m_shaderTypeLookup.end())
+		{
+			return iterator->second;
+		}
+
+		return ShaderType::None;
+	}
+
 	void AShader::SetUniformMat4fv(const std::string& Name, uint32 Size, bool Transpose, const glm::mat4& Matrix) const
 	{
 		Log(Logger::WARN, "Function not implemented [%s]", __FUNCTION__);
@@ -63,7 +84,6 @@ namespace CraftyBlocks
 	{
 		Log(Logger::WARN, "Function not implemented [%s]", __FUNCTION__);
 	}
-
 	void AShader::SetUniformSampler2DTextureUnit(const std::string& Sampler2DName, int32 Location) const
 	{
 		Log(Logger::WARN, "Function not implemented [%s]", __FUNCTION__);

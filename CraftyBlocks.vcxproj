@@ -168,6 +168,7 @@
     <ClCompile Include="Renderer\Mesh.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
     <ClCompile Include="Renderer\Shader.cpp" />
+    <ClCompile Include="Renderer\ShaderProgram.cpp" />
     <ClCompile Include="Renderer\Texture.cpp" />
     <ClCompile Include="Renderer\TextureType.cpp" />
     <ClCompile Include="Renderer\Transform.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Renderer\PrimitiveMode.h" />
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Renderer\Shader.h" />
+    <ClInclude Include="Renderer\ShaderProgram.h" />
     <ClInclude Include="Renderer\Texture.h" />
     <ClInclude Include="Renderer\TextureType.h" />
     <ClInclude Include="Renderer\TextureUtils.h" />

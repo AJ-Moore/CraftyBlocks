@@ -35,3 +35,15 @@ using uint8 = unsigned char;
 // JSON 
 #include <nlohmann/json.hpp>
 using namespace nlohmann;
+
+// Move to string util
+class StringUtil
+{
+public:
+    static constexpr std::string ToLower(const std::string& str) {
+        std::string lowerStr = str;
+        std::transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(),
+            [](unsigned char c) { return std::tolower(c); });
+        return lowerStr;
+    }
+};

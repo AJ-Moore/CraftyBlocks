@@ -11,14 +11,14 @@ struct Colour
 	uint8 a = 255;
 };
 
-enum class UTextureFilter
+enum class TextureFilter
 {
 	NearestNeighbour,
 	Linear,
 	None
 };
 
-enum class UTextureClamp
+enum class TextureClamp
 {
 	Clamp,
 	Repeat,
