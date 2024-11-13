@@ -2,6 +2,7 @@
 
 #include <Common.h>
 #include <Core/GameObject.h>
+#include <Renderer/Shader.h>
 
 namespace CraftyBlocks
 {
